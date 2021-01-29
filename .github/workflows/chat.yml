@@ -1,0 +1,34 @@
+
+name: anagai_chatbot
+
+# UTCなので注意 23:00 -> AM8:00 にLineがくる設定
+on:
+#   test用
+#   push:
+  schedule:
+    - cron: '0 23 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # 実行する処理＆コマンド指定
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          # pipの更新...
+          python -m pip install --upgrade pip
+          # line bot sdkのインスコ中...
+          pip install line-bot-sdk
+      - name: Run script
+#         env:
+#           CHANNEL_ACCESS_TOKEN: "tcHTcxy8mEq0+fkuaxPjIomIPEWUv4KVC264D70ADpUZpmyAUvvs+Gn9sORxMM123QPuX2lnXr8cjzibMJ6Tml0evnfWiWz0gvB3LgLmo93jHN0ZDICzKgEWb95tTFI9dY96d/DwHb9obARRU84kEwdB04t89/1O/w1cDnyilFU="
+#           USER_ID: "U33b807b0575c2da9234900cd2cb156e3"
+        run: |
+          # メッセージ送信...
+          python line_cute.py
