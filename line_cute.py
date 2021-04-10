@@ -10,19 +10,14 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 import os
-import json
-from os import name
-from linebot import LineBotApi
-import linebot
-from linebot.models import TextSendMessage, messages
  
 app = Flask(__name__)
  
 #環境変数取得
 # LINE Developersで設定されているアクセストークンとChannel Secretをを取得し、設定します。
-YOUR_CHANNEL_ACCESS_TOKEN = info["YOUR_CHANNEL_ACCESS_TOKEN"]
-YOUR_CHANNEL_SECRET = info["YOUR_CHANNEL_SECRET"]
-
+YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
+YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
+ 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
  
@@ -37,13 +32,12 @@ def callback():
     # リクエストボディを取得します。
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
- 
+
     try:
         handler.handle(body, signature)
 
     except InvalidSignatureError:
         abort(400)
-
     return 'OK'
  
 ## 2 ##
