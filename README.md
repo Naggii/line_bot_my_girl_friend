@@ -1,3 +1,2 @@
-# anagaiを起床させるために開発したlinebot
-
-朝八時(正確には8時4分)にカワイイ女の子が朝ラインを入れてくれるbotです。
+1. reply send message 
+2. ayumu -> Genius !!!
